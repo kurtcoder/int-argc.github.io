@@ -7,18 +7,20 @@ permalink: /redis-tutorial/
 ##Application Development Tutorial
 
 ###Redis Tutorial
-IBM [Bluemix](https://ibm.biz/bluemixph) is a platform as a service (PaaS) cloud technology of IBM.  You may develop applications and deploy them in Bluemix.
+Redis is often described as a key-value datastore, but what is a datastore? We can think of it like this: Redis is a database that offers data structures which can be used to store your data.
 
 In this tutorial you will learn how to deploy a sample JSP application in Bluemix.  In addition, you will also learn how to create a PostgreSQL database service that will be used by the sample application.
 
 >**Prerequisite:**
 
->Having a basic background in web application development is required in this tutorial.
+>Basic background in web application development is required in this tutorial.
+>Basic knowledge in databases.
+>Basic knowledge in data structures.
 
 <br>
 
-####Create a Bluemix Account
-1. Go to [Bluemix](https://ibm.biz/bluemixph) and click the `SIGN UP` button.
+####Basic Knowledge
+1. Redis offers data structures. Data structures are 
 
 1. Fill-up and submit the registration form.
 
