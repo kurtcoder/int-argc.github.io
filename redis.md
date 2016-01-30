@@ -1,8 +1,7 @@
-
 ---
 layout: post
-title: Redis Tutorial
-permalink: /redis-tutorial/
+title: Bluemix Basics
+permalink: /redis/
 ---
 
 ##Application Development Tutorial
