@@ -20,7 +20,7 @@ In this tutorial you will learn how to deploy a sample JSP application in Bluemi
 <br>
 
 ####Basic Knowledge
-1. Redis offers data structures. Data structures are 
+1. Redis offers data structures. Data structures are good...
 
 1. Fill-up and submit the registration form.
 
