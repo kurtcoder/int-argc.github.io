@@ -7,9 +7,9 @@ permalink: /redis-tutorial/
 ##Application Development Tutorial
 
 ###Redis Tutorial
-Redis is often described as a key-value datastore, but what is a datastore? We can think of it like this: Redis is a database that offers data structures which can be used to store your data. Redis offers multiple data structures to organize stored data. We will be focusing on one data structure in this tutorial, the sorted set.
+Redis is often described as a key-value data structure store, but what is a data structure store? We can think of it like this: Redis is a database that offers data structures which can be used to store your data. We will be focusing on one data structure in this tutorial, the sorted set.
 
-In this tutorial you will learn how to deploy a sample JSP application in Bluemix.  In addition, you will also learn how to create a PostgreSQL database service that will be used by the sample application.
+In this tutorial you will learn the basics of Redis and how to integrate it with your application.
 
 We will be building a simple voting application that makes use of Redis.
 
@@ -18,28 +18,74 @@ We will be building a simple voting application that makes use of Redis.
 >Basic background in web application development is required in this tutorial.
 >Basic knowledge in databases.
 >Basic knowledge in data structures.
+>It is Recommended that you have completed bluemix basics (link herE!!!)
 
 <br>
 
-####Basic Knowledge
-1. Redis offers data structures. Data structures are good...
+####Get a copy of the project from GitHub
+1. Create a directory redistemp and go to that directory
 
-1. Fill-up and submit the registration form.
+	```text		
+	> mkdir redistemp
+	> cd redistemp
+	```
 
-1. Wait for a confirmation e-mail and follow the instructions in the e-mail to validate your Bluemix registration.
+2. Clone the repository from https://github.com/int-argc/RedisVoting.git
+
+	```text		
+		> git clone https://github.com/int-argc/RedisVoting.git
+	```
+
+3. Go to the project root.
+ ```text		
+		> cd redis-voting
+	```
+4. Notice that the directory structure looks  like this
+// make ascii tree of directory
 
 <br>
 
-####Explore your Bluemix Account
+####Run the Application in Bluemix
 
-1. Open a web browser and login to your [Bluemix](https://ibm.biz/bluemixph) account.
+1. The application starts with an empty list of candidates.
 
-1. You will be redirected to your dashboard.  Your dashboard:
-	- provides some information regarding your account (e.g., organization, spaces, etc.)
-	- summarizes the amount of resources you have consumed 
-	- enumerates the applications, services, containers, and virtual machines you have created.
+2. Add two candidates, Person A and Person B.
 
-	<br>
+3. You can see that the candidates are added in the list.
+
+4. Vote on Person A once. This should make Person A in the top of the list with Person B below him.
+
+5. Now vote for Person B twice, since Person B already contains more votes than Person A, Person B should appear at the top of the list.
+
+6. Play with the application and try to add more candidates and give them random number of votes.
+
+7. Click reset candidate list and you will have an empty list.
+
+
+Imagine how you would do that in a regular MySQL database. For example, if you would sort the candidates in the list, you will probably have something like this:
+
+    SELECT * from Candidates ORDER BY votes DESC;
+
+Since MySQL stores data in no particular order, MySQL will sort the candidates every time you want that data.
+
+That can hurt performance, and that is one problems that can be solved with Redis.
+
+The application in this tutorial uses sorted set, a data structure offered by Redis. More of it will be discussed further.
+
+
+####Examine the Code
+Let us first examine the code and learn how we can connect to a Redis Server.
+
+ 1. Open the file `RedisConnector.java`
+
+Observe RedisConnector.java. Similar to most database systems, connecting to the Redis server also requires a driver. We will be using **Jedis** in this tutorial but there are other drivers that can be used with Java. <!-- link to others? -->
+
+The information needed to connect to the Redis server are the following: **IP address, port and password**.
+
+ 2.  Examine the method `configParameters()`
+
+
+<br>
 
 1. You may have one ore more organizations.  By default, you only have one organization.  The name of this organization is the same as your Bluemix account.
 
