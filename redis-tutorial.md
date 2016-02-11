@@ -7,9 +7,11 @@ permalink: /redis-tutorial/
 ##Application Development Tutorial
 
 ###Redis Tutorial
-Redis is often described as a key-value datastore, but what is a datastore? We can think of it like this: Redis is a database that offers data structures which can be used to store your data.
+Redis is often described as a key-value datastore, but what is a datastore? We can think of it like this: Redis is a database that offers data structures which can be used to store your data. Redis offers multiple data structures to organize stored data. We will be focusing on one data structure in this tutorial, the sorted set.
 
 In this tutorial you will learn how to deploy a sample JSP application in Bluemix.  In addition, you will also learn how to create a PostgreSQL database service that will be used by the sample application.
+
+We will be building a simple voting application that makes use of Redis.
 
 >**Prerequisite:**
 
