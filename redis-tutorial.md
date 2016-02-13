@@ -4,7 +4,7 @@ title: Redis Tutorial
 permalink: /redis-tutorial/
 ---
 
-##Application Development Tutorial
+##Application Development Tutorials
 
 ###Redis Tutorial
 Redis is often described as a key-value data structure store, but what is a data structure store? We can think of it like this: Redis is a database that offers data structures which can be used to store your data. We will be focusing on one data structure in this tutorial, the sorted set.
