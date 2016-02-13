@@ -4,7 +4,7 @@ title: Redis Tutorial
 permalink: /redis-tutorial/
 ---
 
-##Application Development Tutorials
+##Application Development Tutorial
 
 ###Redis Tutorial
 Redis is often described as a key-value data structure store, but what is a data structure store? We can think of it like this: Redis is a database that offers data structures which can be used to store your data. We will be focusing on one data structure in this tutorial, the sorted set.
@@ -84,7 +84,7 @@ Let us first examine the code and learn how we can connect to a Redis Server.
 	The information needed to connect to the Redis server are the following: **IP address, port and password**.
 
 
- 2. Examine the method `configParameters()
+ 2. Examine the method `configParameters()`
 
 	This method extracts the information from the cloud environment variable VCAP_SERVICES. This has already been discussed in <link to bluemix basics>.
 
