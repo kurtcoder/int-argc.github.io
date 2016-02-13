@@ -16,8 +16,11 @@ We will be building a simple voting application that makes use of Redis.
 >**Prerequisite:**
 
 >Basic background in web application development is required in this tutorial.
+>
 >Basic knowledge in databases.
+>
 >Basic knowledge in data structures.
+>
 >It is Recommended that you have completed bluemix basics (link herE!!!)
 
 <br>
@@ -33,12 +36,12 @@ We will be building a simple voting application that makes use of Redis.
 2. Clone the repository from https://github.com/int-argc/RedisVoting.git
 
 	```text		
-		> git clone https://github.com/int-argc/RedisVoting.git
+	> git clone https://github.com/int-argc/RedisVoting.git
 	```
 
 3. Go to the project root.
  ```text		
-		> cd redis-voting
+	> cd redis-voting
 	```
 4. Notice that the directory structure looks  like this
 // make ascii tree of directory
