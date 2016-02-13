@@ -80,14 +80,13 @@ The application in this tutorial uses sorted set, a data structure offered by Re
 Let us first examine the code and learn how we can connect to a Redis Server.
 
  1. Open the file `RedisConnector.java`
-	 
-	
- Observe RedisConnector.java. Similar to most database systems, connecting to the Redis server also requires a driver. We will be using **Jedis** in this tutorial but there are other drivers that can be used with Java. <!-- link to others? -->
+
+	 Observe RedisConnector.java. Similar to most database systems, connecting to the Redis server also requires a driver. We will be using **Jedis** in this tutorial but there are other drivers that can be used with Java. <!-- link to others? -->
 
 	The information needed to connect to the Redis server are the following: **IP address, port and password**.
-
-
+ 
  2. Examine the method `configParameters()`
+	 
 
 	This method extracts the information from the cloud environment variable VCAP_SERVICES. This has already been discussed in <link to bluemix basics>.
 
