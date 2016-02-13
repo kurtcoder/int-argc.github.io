@@ -77,25 +77,29 @@ The application in this tutorial uses sorted set, a data structure offered by Re
 Let us first examine the code and learn how we can connect to a Redis Server.
 
  1. Open the file `RedisConnector.java`
+	 
+	
+ Observe RedisConnector.java. Similar to most database systems, connecting to the Redis server also requires a driver. We will be using **Jedis** in this tutorial but there are other drivers that can be used with Java. <!-- link to others? -->
+
+	The information needed to connect to the Redis server are the following: **IP address, port and password**.
 
 
-Observe RedisConnector.java. Similar to most database systems, connecting to the Redis server also requires a driver. We will be using **Jedis** in this tutorial but there are other drivers that can be used with Java. <!-- link to others? -->
+ 2. Examine the method `configParameters()
 
-The information needed to connect to the Redis server are the following: **IP address, port and password**.
-
- 2.  Examine the method `configParameters()`
-
-This method extracts the information from the cloud environment variable VCAP_SERVICES. This has already been discussed in <link to bluemix basics>.
+	This method extracts the information from the cloud environment variable VCAP_SERVICES. This has already been discussed in <link to bluemix basics>.
 
  3. Examine the constructor `RedisConnector()`
 
-    pool = new JedisPool(new JedisPoolConfig(), this.host, this.port, 2000, this.password);
+	    pool = new JedisPool(new JedisPoolConfig(), this.host, this.port, 2000, this.password);
 
-> JedisPool(pool config, host, port, timeout, password);
+	> JedisPool(pool config, host, port, timeout, password);
 
-The constructor makes a JedisPool, this will be responsible for providing a Jedis instance.
+	The constructor makes a JedisPool, this will be responsible for providing a Jedis instance.
 
-1. Examine SetOperations.java
+
+ 4. Examine SetOperations.java
+
+
 ``` java
 public class SetOperations {
 
