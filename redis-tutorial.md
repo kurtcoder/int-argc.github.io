@@ -50,19 +50,21 @@ We will be building a simple voting application that makes use of Redis.
 
 ####Run the Application in Bluemix
 
-1. The application starts with an empty list of candidates.
+1. Push the application to Bluemix and bind the redis service (catalog > Bluemix Labs Catalog > Redis Experimental) - important!!!!!!!!!!! redis labs use experimental!
 
-2. Add two candidates, Person A and Person B.
+2. The application starts with an empty list of candidates.
 
-3. You can see that the candidates are added in the list.
+3. Add two candidates, Person A and Person B.
 
-4. Vote on Person A once. This should make Person A in the top of the list with Person B below him.
+4. You can see that the candidates are added in the list.
 
-5. Now vote for Person B twice, since Person B already contains more votes than Person A, Person B should appear at the top of the list.
+5. Vote on Person A once. This should make Person A in the top of the list with Person B below him.
 
-6. Play with the application and try to add more candidates and give them random number of votes.
+6. Now vote for Person B twice, since Person B already contains more votes than Person A, Person B should appear at the top of the list.
 
-7. Click reset candidate list and you will have an empty list.
+7. Play with the application and try to add more candidates and give them random number of votes.
+
+8. Click reset candidate list and you will have an empty list.
 
 
 Imagine how you would do that in a regular MySQL database. For example, if you would sort the candidates in the list, you will probably have something like this:
