@@ -40,9 +40,11 @@ We will be building a simple voting application that makes use of Redis.
 	```
 
 3. Go to the project root.
- ```text		
-	> cd redis-voting
+
+	```text		
+	> cd RedisVoting
 	```
+	
 4. Notice that the directory structure looks  like this
 // make ascii tree of directory
 
@@ -50,7 +52,12 @@ We will be building a simple voting application that makes use of Redis.
 
 ####Run the Application in Bluemix
 
-1. Push the application to Bluemix and bind the redis service (catalog > Bluemix Labs Catalog > Redis Experimental) - important!!!!!!!!!!! redis labs use experimental!
+1. Build the application with gradle and push the application to Bluemix then bind the redis service (Catalog > Bluemix Labs Catalog > Redis Experimental)
+
+    gradle assemble
+    cf push redis-jeff -m 256M -p build/libs/redisvote.war
+
+> **IMPORTANT**: Use Redis Experimental, found in Bluemix Labs Catalog located at the bottom of the Catalog page.
 
 2. The application starts with an empty list of candidates.
 
@@ -90,7 +97,7 @@ Let us first examine the code and learn how we can connect to a Redis Server.
  2. Examine the method `configParameters()`
 	 
 
-	This method extracts the information from the cloud environment variable VCAP_SERVICES. This has already been discussed in <link to bluemix basics>.
+	This method extracts the information from the cloud environment variable VCAP_SERVICES. This has already been discussed in [bluemix basics](http://pong-pantola.github.io/bluemix-basics).
 
  3. Examine the constructor `RedisConnector()`
 
