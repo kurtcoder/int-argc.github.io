@@ -7,7 +7,7 @@ permalink: /redis-tutorial/
 ##Application Development Tutorial
 
 ###Redis Tutorial
-Redis is often described as a key-value data structure store, but what is a data structure store? We can think of it like this: Redis is a database that offers data structures which can be used to store your data. We will be focusing on one data structure in this tutorial, the sorted set.
+Redis is often described as a key-value data structure store, in other words, Redis is a database that offers data structures which can be used to store your data. We will be focusing on one data structure in this tutorial, the sorted set.
 
 In this tutorial you will learn the basics of Redis and how to integrate it with your application.
 
@@ -21,7 +21,7 @@ We will be building a simple voting application that makes use of Redis.
 >
 >Basic knowledge in data structures.
 >
->It is Recommended that you have completed bluemix basics (link herE!!!)
+>It is recommended that you have completed [bluemix basics](http://pong-pantola.github.io/bluemix-basics)
 
 <br>
 
@@ -57,7 +57,7 @@ We will be building a simple voting application that makes use of Redis.
     gradle assemble
     cf push redis-jeff -m 256M -p build/libs/redisvote.war
 
-> **IMPORTANT**: Use Redis Experimental, found in Bluemix Labs Catalog located at the bottom of the Catalog page.
+    > **IMPORTANT**: Use Redis Experimental, found in Bluemix Labs Catalog located at the bottom of the Catalog page.
 
 2. The application starts with an empty list of candidates.
 
@@ -90,7 +90,7 @@ Let us first examine the code and learn how we can connect to a Redis Server.
 
  1. Open the file `RedisConnector.java`
 
-	 Observe RedisConnector.java. Similar to most database systems, connecting to the Redis server also requires a driver. We will be using **Jedis** in this tutorial but there are other drivers that can be used with Java. <!-- link to others? -->
+	 Observe RedisConnector.java. Similar to most database systems, connecting to the Redis server also requires a driver. We will be using **Jedis** in this tutorial but there are [other drivers](http://redis.io/clients#java) that can be used with Java.
 
 	The information needed to connect to the Redis server are the following: **IP address, port and password**.
  
@@ -226,9 +226,7 @@ Getting the list of candidates ranked from the most to the least votes.
 
 With the data structures offered by Redis, application data storage is simplified.
 
-##End ---
+For more info about 
 
-
-
-####End of Tutorial
+###End of Tutorial
 
