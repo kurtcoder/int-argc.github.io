@@ -43,6 +43,7 @@ We will be building a simple voting application that makes use of Redis.
 	```
 	
 4. Notice that the directory structure looks  like this
+
 ``` text
 Project Root
 |   .gitignore
