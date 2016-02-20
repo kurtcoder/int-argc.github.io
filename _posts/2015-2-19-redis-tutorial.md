@@ -4,9 +4,6 @@ title: Redis Tutorial
 permalink: /redis-tutorial/
 ---
 
-##Application Development Tutorial
-
-###Redis Tutorial
 Redis is often described as a key-value data structure store, in other words, Redis is a database that offers data structures which can be used to store your data. We will be focusing on one data structure in this tutorial, the sorted set.
 
 In this tutorial you will learn the basics of Redis and how to integrate it with your application.
@@ -46,7 +43,35 @@ We will be building a simple voting application that makes use of Redis.
 	```
 	
 4. Notice that the directory structure looks  like this
-// make ascii tree of directory
+``` text
+Project Root
+|   .gitignore
+|   build.gradle
+|   README.md
+|   settings.gradle
+|
+\---src
+    +---main
+    |   +---java
+    |   |   \---tutorial
+    |   |       +---redistools
+    |   |       |       RedisConnector.java
+    |   |       |       SetOperations.java
+    |   |       |
+    |   |       \---servlet
+    |   |               AddEntry.java
+    |   |               ResetList.java
+    |   |               Vote.java
+    |   |
+    |   \---webapp
+    |           AddCandidate.jsp
+    |           index.jsp
+    |           styles.css
+    |
+    \---test
+            SetTests.java
+
+```
 
 <br>
 
@@ -54,8 +79,10 @@ We will be building a simple voting application that makes use of Redis.
 
 1. Build the application with gradle and push the application to Bluemix then bind the redis service (Catalog > Bluemix Labs Catalog > Redis Experimental)
 
-    gradle assemble
-    cf push redis-jeff -m 256M -p build/libs/redisvote.war
+	```text		
+	>  gradle assemble
+	>  cf push redis-jeff -m 256M -p build/libs/redisvote.war
+	```
 
     > **IMPORTANT**: Use Redis Experimental, found in Bluemix Labs Catalog located at the bottom of the Catalog page.
 
@@ -226,7 +253,7 @@ Getting the list of candidates ranked from the most to the least votes.
 
 With the data structures offered by Redis, application data storage is simplified.
 
-For more info about 
+For more info about Redis see the Redis [documentation](http://redis.io/documentation).
 
 ###End of Tutorial
 
