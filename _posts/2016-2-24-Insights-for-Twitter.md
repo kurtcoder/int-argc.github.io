@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Redis Tutorial
-permalink: /redis-tutorial/
+title: Insights for Twitter
+permalink: /insights-for-twitter/
 ---
 
 Redis is often described as a key-value data structure store, in other words, Redis is a database that offers data structures which can be used to store your data. We will be focusing on one data structure in this tutorial, the sorted set.
