@@ -148,83 +148,52 @@ You have successfully deployed your Insights for Twitter Application
 #### Using the Application
 
 1. On a new tab, access your new application using the url `http://insights-for-twitter-<yourname>.mybluemix.net`
-2. The first operation that the web application can do is to count the number of tweets, given a keyword
-	> e.g. #ibm, binay
-
+2. The first operation that the web application can do is to count the number of tweets, given a keyword e.g. `#ibm` or `binay` 
 The Result for the #ibm query will look like this
 ```
 	 {"related":{"search":{"href":"https://cdeservice.mybluemix.net:443/api/v1/messages/search?q=%23ibm"}},"search":{"results":198618}} 
 ```
-1. Look for the `Text to Speech` service and click it.
+This output which is in `JSON` format, shows the url that we used to access the Insights for Twitter Service
 
-1. In the `Service name` text box, type `Text to Speech - <your-name>`.
+```
+	 {"related":{"search":{"href":"https://cdeservice.mybluemix.net:443/api/v1/messages/search?q=%23ibm"}}
+```
 
-1. Click the `CREATE` button.
+As well as the results of the query, count the number of times the keyword is mentioned in tweets
 
-1. When asked to restage your application, click the `RESTAGE` button.  Wait for your application to restage.
+```
+"search":{"results":198618}} 
+```
 
-1. Open another browser tab (do not close the browser tab containing your Bluemix account).  Go to `http://t2s-<your_name>.mybluemix.net` to test if the sample application can already connect to the Text to Speech service.
+3. The next operation that the web application can do is to search for tweets using a keyword. e.g. `#Duterte` and specifiying how many tweets regarding the keyword you want to see `1`
+4. For the first text field enter `#Duterte` , for the next text field enter `1`
+	>This will search for 1 tweet which includes #Duterte in its content.
 
-1. In the text box, type any word or sentence that you want to synthesize. (For this tutorial, we can only use English words and sentences, but the service can synthesize Brazilian Portuguese, English, French, German, Italian, Japanese, and Spanish)
-	
-1. Click the `Submit` button.  
-2. After clicking the submit button, a file will be downloaded automatically.
-3. Locate the downloaded file and rename it. Append a `.wav` at the end of the file name.
-4. Play the wav file using any audio player.
+The Result for the Query will look like this
 
-	<br>
+```
+{"search":{"results":6799,"current":1},"tweets":[{"cde":{"author":{"gender":"unknown","parenthood":{"isParent":"unknown","evidence":""},"location":{"country":"","city":"","state":""},"maritalStatus":{"isMarried":"unknown","evidence":""}},"content":{"sentiment":{"evidence":[{"polarity":"NEGATIVE","sentimentTerm":"NOT trust"},{"polarity":"NEGATIVE","sentimentTerm":"puppet"}],"polarity":"NEGATIVE"}}},"message":{"postedTime":"2014-12-23T03:03:18.000Z","verb":"post","link":"http://twitter.com/ericarreza/statuses/547225910999384065","inReplyTo":{"link":"http://twitter.com/iAmMomiRhay/statuses/547154097283923968"},"generator":{"displayName":"Twitter Web Client","link":"http://twitter.com"},"body":"@iAmMomiRhay @inquirerdotnet I don't trust 2 those NPA & other leftist they're puppet to Commie China #duterte should execute them. 😡😤","favoritesCount":0,"objectType":"activity","actor":{"summary":"Buy Baybayin.PH tshirt by clicking #baybayinph","image":"https://pbs.twimg.com/profile_images/511434104382844929/E6s8ZSX0_normal.jpeg","statusesCount":10121,"utcOffset":"-32400","languages":["en"],"preferredUsername":"ericarreza","displayName":"Baybayin Retro","postedTime":"2009-05-10T02:10:15.000Z","link":"http://www.twitter.com/ericarreza","verified":false,"friendsCount":2001,"twitterTimeZone":"Alaska","favoritesCount":4588,"listedCount":3,"objectType":"person","links":[{"rel":"me","href":"http://facebook.com/r1210designers"}],"location":{"displayName":"Pearl of The Orient Sea","objectType":"place"},"id":"id:twitter.com:38975279","followersCount":434},"provider":{"displayName":"Twitter","link":"http://www.twitter.com","objectType":"service"},"twitter_filter_level":"medium","twitter_entities":{"urls":[],"hashtags":[{"indices":[106,114],"text":"duterte"}],"user_mentions":[{"indices":[0,12],"screen_name":"iAmMomiRhay","id_str":"248089128","name":"rhay garcia","id":248089128},{"indices":[13,28],"screen_name":"inquirerdotnet","id_str":"15448383","name":"Inquirer Group","id":15448383}],"trends":[],"symbols":[]},"twitter_lang":"en","id":"tag:search.twitter.com,2005:547225910999384065","retweetCount":0,"gnip":{"language":{"value":"en"}},"object":{"summary":"@iAmMomiRhay @inquirerdotnet I don't trust 2 those NPA & other leftist they're puppet to Commie China #duterte should execute them. 😡😤","postedTime":"2014-12-23T03:03:18.000Z","link":"http://twitter.com/ericarreza/statuses/547225910999384065","id":"object:search.twitter.com,2005:547225910999384065","objectType":"note"}}}],"related":{"next":{"href":"https://cdeservice.mybluemix.net:443/api/v1/messages/search?q=%23Duterte&from=1&size=1"}}}
 
-####Analyze how the Text to Speech Application works
+```
 
-The code shownbelow is the source code found in the Text to Speech Servlet:
+This output which is in `JSON` format, shows information regarding the user who tweeted the tweet, as well as information regarding the tweet
+
+```
+{"search":{"results":6799,"current":1},"tweets":[{"cde":{"author":{"gender":"unknown","parenthood":{"isParent":"unknown","evidence":""},"location":{"country":"","city":"","state":""},"maritalStatus":{"isMarried":"unknown","evidence":""}},"content":{"sentiment":{"evidence":[{"polarity":"NEGATIVE","sentimentTerm":"NOT trust"},{"polarity":"NEGATIVE","sentimentTerm":"puppet"}],"polarity":"NEGATIVE"}}},"message":{"postedTime":"2014-12-23T03:03:18.000Z","verb":"post","link":"http://twitter.com/ericarreza/statuses/547225910999384065","inReplyTo":{"link":"http://twitter.com/iAmMomiRhay/statuses/547154097283923968"},"generator":{"displayName":"Twitter Web Client","link":"http://twitter.com"},"body":"@iAmMomiRhay @inquirerdotnet I don't trust 2 those NPA & other leftist they're puppet to Commie China #duterte should execute them. 😡😤","favoritesCount":0,"objectType":"activity","actor":{"summary":"Buy Baybayin.PH tshirt by clicking #baybayinph","image":"https://pbs.twimg.com/profile_images/511434104382844929/E6s8ZSX0_normal.jpeg","statusesCount":10121,"utcOffset":"-32400","languages":["en"],"preferredUsername":"ericarreza","displayName":"Baybayin Retro","postedTime":"2009-05-10T02:10:15.000Z","link":"http://www.twitter.com/ericarreza","verified":false,"friendsCount":2001,"twitterTimeZone":"Alaska","favoritesCount":4588,"listedCount":3,"objectType":"person","links":[{"rel":"me","href":"http://facebook.com/r1210designers"}],"location":{"displayName":"Pearl of The Orient Sea","objectType":"place"},"id":"id:twitter.com:38975279","followersCount":434},"provider":{"displayName":"Twitter","link":"http://www.twitter.com","objectType":"service"},"twitter_filter_level":"medium","twitter_entities":{"urls":[],"hashtags":[{"indices":[106,114],"text":"duterte"}],"user_mentions":[{"indices":[0,12],"screen_name":"iAmMomiRhay","id_str":"248089128","name":"rhay garcia","id":248089128},{"indices":[13,28],"screen_name":"inquirerdotnet","id_str":"15448383","name":"Inquirer Group","id":15448383}],"trends":[],"symbols":[]},"twitter_lang":"en","id":"tag:search.twitter.com,2005:547225910999384065","retweetCount":0,"gnip":{"language":{"value":"en"}},"object":{"summary":"@iAmMomiRhay @inquirerdotnet I don't trust 2 those NPA & other leftist they're puppet to Commie China #duterte should execute them. 😡😤","postedTime":"2014-12-23T03:03:18.000Z","link":"http://twitter.com/ericarreza/statuses/547225910999384065","id":"object:search.twitter.com,2005:547225910999384065","objectType":"note"}}}],
 
 
-	```
-		
-		// Part 1
-			TexttoSpeechConnector connector = new TexttoSpeechConnector();      
-  			TextToSpeech service = new TextToSpeech();
-  			service.setUsernameAndPassword(connector.getUsername(),connector.getPassword());
-        	// Part 2
-        		String text = request.getParameter("inputText");
-        		String format = "audio/wav";
+```
 
-  			InputStream speech = service.synthesize(text, format);
-  		// Part 3
-            		OutputStream output = response.getOutputStream();
+The output also shows the url that we used to access the Insights for Twitter Service
 
-			    byte[] buf = new byte[2046];
-				int len;
-				while ((len = speech.read(buf)) > 0) {
-					output.write(buf, 0, len);
-				}
-                        
-                response.setContentType("audio/wav");
-    
-				//ServletContext ctx = getServletContext();  
-				response.setHeader("Content-disposition","attachment;filename=output.wav");  
- 
-				OutputStream os =output;   
-                                
-				os.flush();  
-				os.close();  
-	```
-	Part 1 shows the connection to the service. The credentials are obtained and are passed to the service.
-	
-	Part 2 shows the input to output process. In the first part, the text is retrieved from the index.jsp and the format is set to a wav file. After which, it is passed to the service with the use of the service.synthesize method. The parameters needed are the text and the file format, which are both strings. The method returns an InputStream. The synthesize method can be used using the "import com.ibm.watson.developer_cloud.text_to_speech.v1.TextToSpeech;" import.
-	
-	Part 3 shows the download process. An OutputStream is created and the InputStream is written there. The OutputStream is then flushed in order for the file to be downloaded.
-	
-	Note: It is important to remember that the service can output ogg, flac, and wav files. The one shown above uses a wav file as the output. In order to make use of the application for other file types the "format" string must be adjusted accordingly.
+```
+"related":{"next":{"href":"https://cdeservice.mybluemix.net:443/api/v1/messages/search?q=%23Duterte&from=1&size=1"}}}
 
-####Delete the sample application for housekeeping
 
-1. Go to Bluemix.
-2. Click Dashboard.
-3. From the Applications List, click the gear icon of the created application. In the Services tab, make sure that the Text to Speech service is selected. In the Routes tab, make sure that the route (i.e., URL) is selected.
-4. Choose Delete App.
+```
 
-<br>
+#### Analyzing how the Application Works
+
 
 ####End of Tutorial
 
