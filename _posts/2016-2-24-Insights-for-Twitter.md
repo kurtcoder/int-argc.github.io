@@ -6,7 +6,7 @@ permalink: /insights-for-twitter/
 
 The Insights for Twitter service allows us to query Twitter to incorporate Twitter Content to our applications.
 
-Download Insights for Twitter Powerpoint Presentation [here](https://github.com/kurtcoder/insights-for-twitter/blob/master/Insights-For-Twitter-Ley.pptx?raw=true)
+Download Insights for Twitter Powerpoint Presentation [here](https://github.com/kurtcoder/twitterinsightsresources/blob/master/Insights-For-Twitter-Ley.pptx?raw=true)
 
 
 In this tutorial you will deploy a sample Insights for Twitter Application in Bluemix. You will also deploy the application using the Devops Delivery Pipeline, and You will also familiarize yourself with the service.
@@ -16,7 +16,7 @@ You will fork the repository that you will deploy using the Devops Delivery Pipe
 
 1. Go to [GitHub](https://github.com) and Login.
 
-2. Go to the Github Repository [https://github.com/kurtcoder/insights-for-twitter/tree/master/InsightsForTwitterApp](https://github.com/kurtcoder/insights-for-twitter/tree/master/InsightsForTwitterApp)
+2. Go to the Github Repository [https://github.com/kurtcoder/insights-for-twitter](https://github.com/kurtcoder/insights-for-twitter)
 
 3. Click the `Fork` button to make your own copy of the repository.
 
@@ -26,49 +26,111 @@ You will fork the repository that you will deploy using the Devops Delivery Pipe
 
 1. Open another tab in your web browser and login to [Bluemix DevOps] (https://hub.jazz.net)
 
-2. Login to your Bluemix account using the `cf` tool.
+2. Click  `Create Project` 
+	
+3. Name your project `insights-for-twitter`.
+	
+4. Click `Link to an existing GitHub repository`.  
 
-	```text
-	> cf login -a https://api.ng.bluemix.net -s dev
-	```
-	
-	>When asked for a username (e-mail address) and password, enter the username and password of your Bluemix account.
-	
-	>-a to specify the API endpoint (https://api.ng.bluemix.net).
-	
-	>-s to specify space name (dev).
+5. Select the repository `<username>/insights-for-twitter`
+
+6. Ensure the following options are chosen:
+
+	||||
+	|---|---|---|
+	| **Private Project** | checked |
+	| **Add features for Scrum development** | checked |
+	| **Make this a Bluemix Project** | checked |
+	| **Region** | IBM Bluemix US South |
+	| **Organization** | you may leave the default selection |		
+	| **Space** | dev |
+
+	<br>
+
+7. Click the `CREATE` button and wait for your project to be created.
+
+#### Create a Build Stage
+
+1. Click the `BUILD & DEPLOY` button.
+
+2. Click the `Add Stage` button. 
+
+3. Set the name from `My Stage` to `Build Stage`
+
+4. On the `Input` Tab, set the following values
+
+	||||
+	|---|---|---|
+	| **Input Type** | SCM Repository |
+	| **Git URL** | https://github.com/<username>/insights-for-twitter.git |
+	| **Branch** | master |
+	| **Stage Trigger** | Run jobs whenever a change is pushed to Git |
+
+	<br>
+
+5. Go to the `Jobs` Tab and click `Add Job` and set `Build` as the Job type.
+
+6. Rename `Build` to `Gradle Assemble`
+
+7. Set the following values
+
+	||||
+	|---|---|---|
+	| **Builder Type** | Gradle |		
+	| **Build Shell Command** | `#!/bin/bash`<br>`gradle assemble`  |	
+	| **Stop running this stage if this job fails** | checked |
+
+	<br>
+
+8. Click the `Save` Button.	
+
+#### Create a Deploy Stage
+
+1. Click the `Add Stage` Button
+
+2. Rename `MyStage` to `Deploy Stage`
+
+3. On the `Input` Tab, set the following values
+
+	||||
+	|---|---|---|
+	| **Input Type** | Build Artifacts |
+	| **Stage** | Build Stage |
+	| **Job** | Gradle Assemble |
+	| **Stage Trigger** | Run jobs when the previous stage is completed |
 
 	<br>
 	
-3. Upload the sample application to your Bluemix account.
+4. On the `Jobs` Tab Click `Add Job` and select `Deploy`
 
-	```text
-	> cf push t2s-<your_name> -m 256M -p t2s.war
-	```
+5. Rename `Deploy` to `Cloud Foundry Push to Dev Space`.
 
-	**Example:**
-		
-	```text
-	> cf push t2s-coloma -m 256M -p t2s.war
-	```
-	-m to specify the memory to be allocated for the application being pushed (256M)
-	
-	-p to specify the file to be uploaded (t2s.war)
-	
-	-<your-name> is for you to have a unique bluemix url
+6. Set the following values
+
+	||||
+	|---|---|---|
+	| **Deployer Type** | Cloud Foundry |		
+	| **Target** | IBM Bluemix US South - https://api.ng.bluemix.net |		
+	| **Organization** | you may leave the default selection |		
+	| **Space** | dev |	
+	| **Application Name** | blank |		
+	| **Deploy Script** | `#!/bin/bash`<br> `cf push insights-for-twitter-<your_name> -m 256M -p build/libs/twitterinsights.war` |	
+	| **Stop running this stage if this job fails** | checked |
 
 	<br>
-	
-1. Go to IBM Bluemix Website and Login .  Once logged in, click `DASHBOARD`.  
 
-	The `Applications` section of your dashboard shows a widget representing the application `t2s-<your_name>` you deployed earlier.
+7. Click `Save`
 
-	
-	<br>
-	
-1. Click the widget of your application to see its overview.
-	
-1. Click the `ADD A SERVICE OR API` link.  You will be redirected to the `Catalog` page. 
+You have created a delivery pipeline.
+
+#### Deploy The application
+
+1. Click the `Run Stage` icon of the `Build Stage`
+
+	>Make sure all the stages pass before proceeding to the next step.
+
+2. Go to the [Bluemix] (https://console.ng.bluemix.net) Website and Login.
+3. 
 
 1. Look for the `Text to Speech` service and click it.
 
