@@ -130,7 +130,26 @@ You have created a delivery pipeline.
 	>Make sure all the stages pass before proceeding to the next step.
 
 2. Go to the [Bluemix] (https://console.ng.bluemix.net) Website and Login.
-3. 
+
+3. Go to the `Dashboard` Tab and click the widget of your application `insights-for-twitter-<yourname>`
+
+4. Click `Add a Service or API`
+
+5. In the Catalog page look for the `Insights for Twitter` service and click it.
+
+6. Rename the Service name to `Insights for Twitter - <yourname>` . Select the `Free Plan` Option in the `Selected Plan` Dropdown.
+
+7. Click `Create`
+
+8.  When prompted to Restage Application, press `Restage`
+
+You have successfully deployed your Insights for Twitter Application
+
+#### Using the Application
+
+1. On a new tab, access your new application using the url `http://insights-for-twitter-<yourname>.mybluemix.net`
+2. The first operation that the web application can do is to count the number of tweets, given a keyword
+	> e.g. #ibm, binay
 
 1. Look for the `Text to Speech` service and click it.
 
