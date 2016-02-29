@@ -105,7 +105,7 @@ You will fork the repository that you will deploy using the Devops Delivery Pipe
 
 5. Rename `Deploy` to `Cloud Foundry Push to Dev Space`.
 
-6. Set the following values
+6. Set the following values:
 
 	||||
 	|---|---|---|
