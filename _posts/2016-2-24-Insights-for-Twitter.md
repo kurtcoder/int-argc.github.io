@@ -4,257 +4,142 @@ title: Insights for Twitter
 permalink: /insights-for-twitter/
 ---
 
-Redis is often described as a key-value data structure store, in other words, Redis is a database that offers data structures which can be used to store your data. We will be focusing on one data structure in this tutorial, the sorted set.
+The Insights for Twitter service allows us to query Twitter to incorporate Twitter Content to our applications.
 
-In this tutorial you will learn the basics of Redis and how to integrate it with your application.
+Download Insights for Twitter Powerpoint Presentation [here](https://github.com/kurtcoder/insights-for-twitter/blob/master/Insights-For-Twitter-Ley.pptx?raw=true)
 
-We will be building a simple voting application that makes use of Redis.
 
->**Prerequisite:**
+In this tutorial you will deploy a sample Insights for Twitter Application in Bluemix. You will also deploy the application using the Devops Delivery Pipeline, and You will also familiarize yourself with the service.
 
->Basic background in web application development is required in this tutorial.
->
->Basic knowledge in databases.
->
->Basic knowledge in data structures.
->
->It is recommended that you have completed [bluemix basics](http://pong-pantola.github.io/bluemix-basics)
+#### Fork a Github Repository
+You will fork the repository that you will deploy using the Devops Delivery Pipeline.
+
+1. Go to [GitHub](https://github.com) and Login.
+
+2. Go to the Github Repository [https://github.com/kurtcoder/insights-for-twitter/tree/master/InsightsForTwitterApp](https://github.com/kurtcoder/insights-for-twitter/tree/master/InsightsForTwitterApp)
+
+3. Click the `Fork` button to make your own copy of the repository.
 
 <br>
 
-####Get a copy of the project from GitHub
-1. Create a directory redistemp and go to that directory
+#### Create a Bluemix DevOps Project based on the Github Repository 
 
-	```text		
-	> mkdir redistemp
-	> cd redistemp
-	```
+1. Open another tab in your web browser and login to [Bluemix DevOps] (https://hub.jazz.net)
 
-2. Clone the repository from https://github.com/int-argc/RedisVoting.git
+2. Login to your Bluemix account using the `cf` tool.
 
-	```text		
-	> git clone https://github.com/int-argc/RedisVoting.git
-	```
-
-3. Go to the project root.
-
-	```text		
-	> cd RedisVoting
+	```text
+	> cf login -a https://api.ng.bluemix.net -s dev
 	```
 	
-4. Notice that the directory structure looks  like this
+	>When asked for a username (e-mail address) and password, enter the username and password of your Bluemix account.
+	
+	>-a to specify the API endpoint (https://api.ng.bluemix.net).
+	
+	>-s to specify space name (dev).
 
-``` text
-Project Root
-|   .gitignore
-|   build.gradle
-|   README.md
-|   settings.gradle
-|
-\---src
-    +---main
-    |   +---java
-    |   |   \---tutorial
-    |   |       +---redistools
-    |   |       |       RedisConnector.java
-    |   |       |       SetOperations.java
-    |   |       |
-    |   |       \---servlet
-    |   |               AddEntry.java
-    |   |               ResetList.java
-    |   |               Vote.java
-    |   |
-    |   \---webapp
-    |           AddCandidate.jsp
-    |           index.jsp
-    |           styles.css
-    |
-    \---test
-            SetTests.java
+	<br>
+	
+3. Upload the sample application to your Bluemix account.
 
-```
+	```text
+	> cf push t2s-<your_name> -m 256M -p t2s.war
+	```
+
+	**Example:**
+		
+	```text
+	> cf push t2s-coloma -m 256M -p t2s.war
+	```
+	-m to specify the memory to be allocated for the application being pushed (256M)
+	
+	-p to specify the file to be uploaded (t2s.war)
+	
+	-<your-name> is for you to have a unique bluemix url
+
+	<br>
+	
+1. Go to IBM Bluemix Website and Login .  Once logged in, click `DASHBOARD`.  
+
+	The `Applications` section of your dashboard shows a widget representing the application `t2s-<your_name>` you deployed earlier.
+
+	
+	<br>
+	
+1. Click the widget of your application to see its overview.
+	
+1. Click the `ADD A SERVICE OR API` link.  You will be redirected to the `Catalog` page. 
+
+1. Look for the `Text to Speech` service and click it.
+
+1. In the `Service name` text box, type `Text to Speech - <your-name>`.
+
+1. Click the `CREATE` button.
+
+1. When asked to restage your application, click the `RESTAGE` button.  Wait for your application to restage.
+
+1. Open another browser tab (do not close the browser tab containing your Bluemix account).  Go to `http://t2s-<your_name>.mybluemix.net` to test if the sample application can already connect to the Text to Speech service.
+
+1. In the text box, type any word or sentence that you want to synthesize. (For this tutorial, we can only use English words and sentences, but the service can synthesize Brazilian Portuguese, English, French, German, Italian, Japanese, and Spanish)
+	
+1. Click the `Submit` button.  
+2. After clicking the submit button, a file will be downloaded automatically.
+3. Locate the downloaded file and rename it. Append a `.wav` at the end of the file name.
+4. Play the wav file using any audio player.
+
+	<br>
+
+####Analyze how the Text to Speech Application works
+
+The code shownbelow is the source code found in the Text to Speech Servlet:
+
+
+	```
+		
+		// Part 1
+			TexttoSpeechConnector connector = new TexttoSpeechConnector();      
+  			TextToSpeech service = new TextToSpeech();
+  			service.setUsernameAndPassword(connector.getUsername(),connector.getPassword());
+        	// Part 2
+        		String text = request.getParameter("inputText");
+        		String format = "audio/wav";
+
+  			InputStream speech = service.synthesize(text, format);
+  		// Part 3
+            		OutputStream output = response.getOutputStream();
+
+			    byte[] buf = new byte[2046];
+				int len;
+				while ((len = speech.read(buf)) > 0) {
+					output.write(buf, 0, len);
+				}
+                        
+                response.setContentType("audio/wav");
+    
+				//ServletContext ctx = getServletContext();  
+				response.setHeader("Content-disposition","attachment;filename=output.wav");  
+ 
+				OutputStream os =output;   
+                                
+				os.flush();  
+				os.close();  
+	```
+	Part 1 shows the connection to the service. The credentials are obtained and are passed to the service.
+	
+	Part 2 shows the input to output process. In the first part, the text is retrieved from the index.jsp and the format is set to a wav file. After which, it is passed to the service with the use of the service.synthesize method. The parameters needed are the text and the file format, which are both strings. The method returns an InputStream. The synthesize method can be used using the "import com.ibm.watson.developer_cloud.text_to_speech.v1.TextToSpeech;" import.
+	
+	Part 3 shows the download process. An OutputStream is created and the InputStream is written there. The OutputStream is then flushed in order for the file to be downloaded.
+	
+	Note: It is important to remember that the service can output ogg, flac, and wav files. The one shown above uses a wav file as the output. In order to make use of the application for other file types the "format" string must be adjusted accordingly.
+
+####Delete the sample application for housekeeping
+
+1. Go to Bluemix.
+2. Click Dashboard.
+3. From the Applications List, click the gear icon of the created application. In the Services tab, make sure that the Text to Speech service is selected. In the Routes tab, make sure that the route (i.e., URL) is selected.
+4. Choose Delete App.
 
 <br>
 
-####Run the Application in Bluemix
-
-1. Build the application with gradle and push the application to Bluemix then bind the redis service (Catalog > Bluemix Labs Catalog > Redis Experimental)
-
-	```text		
-	>  gradle assemble
-	>  cf push redis-jeff -m 256M -p build/libs/redisvote.war
-	```
-
-    > **IMPORTANT**: Use Redis Experimental, found in Bluemix Labs Catalog located at the bottom of the Catalog page.
-
-2. The application starts with an empty list of candidates.
-
-3. Add two candidates, Person A and Person B.
-
-4. You can see that the candidates are added in the list.
-
-5. Vote on Person A once. This should make Person A in the top of the list with Person B below him.
-
-6. Now vote for Person B twice, since Person B already contains more votes than Person A, Person B should appear at the top of the list.
-
-7. Play with the application and try to add more candidates and give them random number of votes.
-
-8. Click reset candidate list and you will have an empty list.
-
-
-Imagine how you would do that in a regular MySQL database. For example, if you would sort the candidates in the list, you will probably have something like this:
-
-    SELECT * from Candidates ORDER BY votes DESC;
-
-Since MySQL stores data in no particular order, MySQL will sort the candidates every time you want that data.
-
-That can hurt performance, and that is one problems that can be solved with Redis.
-
-The application in this tutorial uses sorted set, a data structure offered by Redis. More of it will be discussed further.
-
-
-####Examine the Code
-Let us first examine the code and learn how we can connect to a Redis Server.
-
- 1. Open the file `RedisConnector.java`
-
-	 Observe RedisConnector.java. Similar to most database systems, connecting to the Redis server also requires a driver. We will be using **Jedis** in this tutorial but there are [other drivers](http://redis.io/clients#java) that can be used with Java.
-
-	The information needed to connect to the Redis server are the following: **IP address, port and password**.
- 
- 2. Examine the method `configParameters()`
-	 
-
-	This method extracts the information from the cloud environment variable VCAP_SERVICES. This has already been discussed in [bluemix basics](http://pong-pantola.github.io/bluemix-basics).
-
- 3. Examine the constructor `RedisConnector()`
-
-	    pool = new JedisPool(new JedisPoolConfig(), this.host, this.port, 2000, this.password);
-
-	> JedisPool(pool config, host, port, timeout, password);
-
-	The constructor makes a JedisPool, this will be responsible for providing a Jedis instance.
-
-
- 4. Examine SetOperations.java
-
-
-``` java
-public class SetOperations {
-
-	// *** constructor removed ***
-
-	public void add(int score, String member) {
-		Jedis jedis = null;
-		try {
-			jedis = pool.getResource();
-			jedis.zadd(keyname, score, member);
-		} finally {
-			jedis.close();
-		}
-	}
-
-	public int getScore(String member) {
-		Jedis jedis = null;
-		double score = -1;
-		try {
-			jedis = pool.getResource();
-			score = jedis.zscore(keyname, member);
-		} finally {
-			jedis.close();
-		}
-
-		return (int)score;
-	}
-
-	public void incrementScore(String member) {
-		Jedis jedis = null;
-		try {
-			jedis = pool.getResource();
-			jedis.zincrby(keyname, 1, member);
-		} finally {
-			jedis.close();
-		}
-	}
-
-	public void deleteSet() {
-		Jedis jedis = null;
-		try {
-			jedis = pool.getResource();
-			jedis.del(keyname);
-		} finally {
-			jedis.close();
-		}
-	}
-
-	public Set<String> sortDesc() {
-		Jedis jedis = null;
-		Set<String> s = null;
-		try {
-			jedis = pool.getResource();
-			s = jedis.zrevrange(keyname, 0, -1);
-		} finally {
-			jedis.close();
-		}
-	}
-}
-```
-Since we will only be using a single data structure in this tutorial, all operations on sorted sets are placed in a single class SetOperations.java
-
-A set is a data structure that contains unique elements. Redis offers a variation of a set called a sorted set. This is similar to a set except that each element has a specific score.
-
-Methods in SetOperations.java just calls the methods from the Jedis API, so we will just be discussing the methods from Jedis instead. Below is an overview of each method:
-<br />
-
-    zadd(<set name>, <score>, <member>)
-
-*adds member to the set having an initial score specified by the parameter score.*
-
-> Note: we will be using zadd to add a new candidate.
-
-<br />
-
-    zscore(<set name>, <member>)
-
-*returns the score of the member*
-
-> we will be using zscore to retrive a particular candidate's number of votes.
-
-    zincrby(<set name>, <increment>, <member>)
-
-*increments the score of member by the parameter increment.*
-
-    del(<set name>)
-
-*deletes the entire set.*
-
-    zrevrange(<set name>, <start index>, <end index>)
-
-*reverses the order of the sorted set and returns a subset of which from `<start index>` to `<end index>`. It would appear in a way that the set is sorted in descending order of member's score.*
-
-
-<br />
-With that, we already have an idea of how the application works. Candidates are members of the set. And the score of the member is the number of votes of the candidate.
-
-Adding a candidate would be like:
-
-    zadd("candidates", 0, "Person A")
-
-Voting on a candidate would be like:
-
-    zincrby("candidates", 1, "Person A")
-
-Getting a candidate's number of votes:
-
-    zscore("candidates", "Person A")
-
-Getting the list of candidates ranked from the most to the least votes.
-
-    zrevrange("candidates", 0, -1)
-
-With the data structures offered by Redis, application data storage is simplified.
-
-For more info about Redis see the Redis [documentation](http://redis.io/documentation).
-
-###End of Tutorial
+####End of Tutorial
 
