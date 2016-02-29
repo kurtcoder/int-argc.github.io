@@ -279,22 +279,22 @@ An example of how it looks like is this
 
 We do this by getting the username and password credentials in the VCAP Services and combining them together seperated with a colon
 
-	```` String userandpass = connector.getUsername() + ":" + connector.getPassword(); ````
+```` String userandpass = connector.getUsername() + ":" + connector.getPassword(); ````
 	
 We then encoded this string using the RFC2045-MIME variant of Base64 and specify the authorization method, `Basic`
 
-	```` String basicAuthorization = "Basic " + javax.xml.bind.DatatypeConverter.printBase64Binary(userandpass.getBytes()); ````
+```` String basicAuthorization = "Basic " + javax.xml.bind.DatatypeConverter.printBase64Binary(userandpass.getBytes()); ````
 
 Lastly, we request for access from the url which has the results of our query.
 
 
-	```` 
-	 URL finalurl = new URL(urlstring);
-         URLConnection urlconnection = finalurl.openConnection();
+```` 
+	URL finalurl = new URL(urlstring);
+        URLConnection urlconnection = finalurl.openConnection();
  
-         urlconnection.setRequestProperty ("Authorization", basicAuthorization);
+        urlconnection.setRequestProperty ("Authorization", basicAuthorization);
 	
-	````
+````
 
 ####End of Tutorial
 
