@@ -148,25 +148,32 @@ You have successfully deployed your Insights for Twitter Application
 #### Using the Application
 
 1. On a new tab, access your new application using the url `http://insights-for-twitter-<yourname>.mybluemix.net`
-2. The first operation that the web application can do is to count the number of tweets, given a keyword e.g. `#ibm` or `binay` 
+
+2. The first operation that the web application can do is to count the number of tweets, given a keyword e.g. `#ibm` or `binay`
+
+
 The Result for the #ibm query will look like this
+
 ```
 	 {"related":{"search":{"href":"https://cdeservice.mybluemix.net:443/api/v1/messages/search?q=%23ibm"}},"search":{"results":198618}} 
 ```
+
 This output which is in `JSON` format, shows the url that we used to access the Insights for Twitter Service
 
 ```
 	 {"related":{"search":{"href":"https://cdeservice.mybluemix.net:443/api/v1/messages/search?q=%23ibm"}}
 ```
 
-As well as the results of the query, count the number of times the keyword is mentioned in tweets
+As well as the results of the query, to count how many tweets included the keyword
 
 ```
 "search":{"results":198618}} 
 ```
 
 3. The next operation that the web application can do is to search for tweets using a keyword. e.g. `#Duterte` and specifiying how many tweets regarding the keyword you want to see `1`
+
 4. For the first text field enter `#Duterte` , for the next text field enter `1`
+
 	>This will search for 1 tweet which includes #Duterte in its content.
 
 The Result for the Query will look like this
