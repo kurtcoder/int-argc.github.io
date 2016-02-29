@@ -152,7 +152,7 @@ You have successfully deployed your Insights for Twitter Application
 	> e.g. #ibm, binay
 
 The Result for the #ibm query will look like this
-	> {"related":{"search":{"href":"https://cdeservice.mybluemix.net:443/api/v1/messages/search?q=%23ibm"}},"search":{"results":198618}} 
+	``` {"related":{"search":{"href":"https://cdeservice.mybluemix.net:443/api/v1/messages/search?q=%23ibm"}},"search":{"results":198618}} 
 
 1. Look for the `Text to Speech` service and click it.
 
