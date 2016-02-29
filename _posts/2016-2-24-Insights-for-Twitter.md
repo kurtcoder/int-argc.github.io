@@ -216,5 +216,85 @@ First, in order for the application to access the service it needs to use the cr
 
 ````
 
+To access the Insights for Twitter service, we use Endpoint URLS
+
+	>The url given by VCAP_SERVICES looks like this
+	> "url": "https://f517f432-e185-41b5-a362-145612499823:3IavoFP6dV@cdeservice.mybluemix.net"
+
+For the count operation, this is the URL we generate
+
+````
+		String input_query = (String) request.getParameter("tQuery");
+		
+		String urlstring = connector.getUrl() + "/api/v1/messages/count?q=" + URLEncoder.encode(input_query, "UTF-8");
+````
+
+`input_query` refers to the value you included in the text field.
+
+`URLEncoder.encode` is a function which allows symbols e.g. #, (space), $ to be converted into a format that can be transmitted over the internet
+
+`/api/v1/messages/count?q=`will be appended to the url, which specifies that we will be using the `count` operation
+
+For the search operation, this is the URL we generate
+
+````
+		String input_query = (String) request.getParameter("tQuery");
+		String input_size = (String) request.getParameter("tSize");
+		
+		String urlstring = connector.getUrl() + "/api/v1/messages/search?q=" + URLEncoder.encode(input_query, "UTF-8") + "&size=" + input_size;
+
+````
+
+`input_query` and `size` are the parameters which you inputted in the text field.
+
+	>input_query refers to a keyword you want to search
+	
+	>size refers to how many tweets you want displayed
+
+`URLEncoder.encode` is a function which allows symbols e.g. #, (space), $ to be converted into a format that can be transmitted over the internet
+
+`/api/v1/messages/search?q=` will be appended to the url, which specifies that we will be using the `search` operation
+
+
+To use the Insights for Twitter service, we need to authenticate ourselves
+
+````
+String userandpass = connector.getUsername() + ":" + connector.getPassword();
+		
+		String basicAuthorization = "Basic " + javax.xml.bind.DatatypeConverter.printBase64Binary(userandpass.getBytes());
+		
+		
+		 URL finalurl = new URL(urlstring);
+         URLConnection urlconnection = finalurl.openConnection();
+ 
+         urlconnection.setRequestProperty ("Authorization", basicAuthorization);
+
+````
+
+In order to authenticate ourselves, we use Client side Basic access authentication
+
+An example of how it looks like is this
+
+	> Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+
+We do this by getting the username and password credentials in the VCAP Services and combining them together seperated with a colon
+
+	```` String userandpass = connector.getUsername() + ":" + connector.getPassword(); ````
+	
+We then encoded this string using the RFC2045-MIME variant of Base64 and specify the authorization method, `Basic`
+
+	```` String basicAuthorization = "Basic " + javax.xml.bind.DatatypeConverter.printBase64Binary(userandpass.getBytes()); ````
+
+Lastly, we request for access from the url which has the results of our query.
+
+
+	```` 
+	 URL finalurl = new URL(urlstring);
+         URLConnection urlconnection = finalurl.openConnection();
+ 
+         urlconnection.setRequestProperty ("Authorization", basicAuthorization);
+	
+	````
+
 ####End of Tutorial
 
