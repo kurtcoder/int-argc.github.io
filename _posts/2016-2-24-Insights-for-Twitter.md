@@ -152,7 +152,7 @@ You have successfully deployed your Insights for Twitter Application
 2. The first operation that the web application can do is to count the number of tweets, given a keyword e.g. `#ibm` or `binay`
 
 
-The Result for the #ibm query will look like this
+Input #ibm in the textfield of `Counting # of Tweets`. The results will look like this:
 
 ```
 	 {"related":{"search":{"href":"https://cdeservice.mybluemix.net:443/api/v1/messages/search?q=%23ibm"}},"search":{"results":198618}} 
