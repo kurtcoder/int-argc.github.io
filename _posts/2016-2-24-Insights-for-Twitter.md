@@ -201,6 +201,20 @@ The output also shows the url that we used to access the Insights for Twitter Se
 
 #### Analyzing how the Application Works
 
+In this tutorial, we were able to create an Insights for Twitter application which uses the operations provided by the
+Insights for Twitter service.
+
+First, in order for the application to access the service it needs to use the credentials of the service. You must login using your service credentials. It will use the credentials listed for insights-for-twitter in VCAP_SERVICES which is seen in Bluemix
+
+````
+                    JSONObject creds = (JSONObject) service.get("credentials");
+                    String username = (String) creds.get("username");
+                    String password = (String) creds.get("password");
+                    String host = (String) creds.get("host");
+                    Long port = (Long) creds.get("port");
+                    String url = (String) creds.get("url");
+
+````
 
 ####End of Tutorial
 
