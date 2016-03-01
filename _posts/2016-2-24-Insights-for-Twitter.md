@@ -64,7 +64,7 @@ Fork the repository that contains the application that you will deploy using the
 	||||
 	|---|---|---|
 	| **Input Type** | SCM Repository |
-	| **Git URL** | https://github.com/username/insights-for-twitter.git |
+	| **Git URL** | https://github.com/your_name/insights-for-twitter.git |
 	| **Branch** | master |
 	| **Stage Trigger** | Run jobs whenever a change is pushed to Git |
 
