@@ -4,15 +4,17 @@ title: Insights for Twitter
 permalink: /insights-for-twitter/
 ---
 
-The Insights for Twitter service allows us to query Twitter to incorporate Twitter Content to our applications.
+The Insights for Twitter service allows us to query Twitter to incorporate Twitter content to our applications.
 
 Download Insights for Twitter Powerpoint Presentation [here](https://github.com/kurtcoder/twitterinsightsresources/blob/master/Insights-For-Twitter-Ley.pptx?raw=true)
 
 
-In this tutorial you will deploy a sample Insights for Twitter Application in Bluemix. You will also deploy the application using the Devops Delivery Pipeline, and You will also familiarize yourself with the service.
+
+In this tutorial you will deploy a sample Insights for Twitter Application in Bluemix through the use of the Devops Delivery Pipeline. You will also familiarize yourself with the service
+
 
 #### Fork a Github Repository
-You will fork the repository that you will deploy using the Devops Delivery Pipeline.
+Fork the repository that contains the application that you will deploy using the Devops Delivery Pipeline.
 
 1. Go to [GitHub](https://github.com) and Login.
 
@@ -164,7 +166,7 @@ This output which is in `JSON` format, shows the url that we used to access the 
 	 {"related":{"search":{"href":"https://cdeservice.mybluemix.net:443/api/v1/messages/search?q=%23ibm"}}
 ```
 
-As well as the results of the query, to count how many tweets included the keyword
+As well as the results of the query, which was to count how many tweets included the keyword
 
 ```
 "search":{"results":198618}} 
@@ -172,9 +174,9 @@ As well as the results of the query, to count how many tweets included the keywo
 
 3. The next operation that the web application can do is to search for tweets using a keyword. e.g. `#Duterte` and specifiying how many tweets regarding the keyword you want to see `1`
 
-4. For the first text field enter `#Duterte` , for the next text field enter `1`
+4. For the first text field enter `#Duterte` , for the second text field enter `1`
 
-	>This will search for 1 tweet which includes #Duterte in its content.
+	>This will search for tweets which include #Duterte in its content, and display only 1.
 
 The Result for the Query will look like this
 
@@ -183,7 +185,7 @@ The Result for the Query will look like this
 
 ```
 
-This output which is in `JSON` format, shows information regarding the user who tweeted the tweet, as well as information regarding the tweet
+This output which is in `JSON` format, shows information regarding the user who tweeted the tweet and information regarding the tweet
 
 ```
 {"search":{"results":6799,"current":1},"tweets":[{"cde":{"author":{"gender":"unknown","parenthood":{"isParent":"unknown","evidence":""},"location":{"country":"","city":"","state":""},"maritalStatus":{"isMarried":"unknown","evidence":""}},"content":{"sentiment":{"evidence":[{"polarity":"NEGATIVE","sentimentTerm":"NOT trust"},{"polarity":"NEGATIVE","sentimentTerm":"puppet"}],"polarity":"NEGATIVE"}}},"message":{"postedTime":"2014-12-23T03:03:18.000Z","verb":"post","link":"http://twitter.com/ericarreza/statuses/547225910999384065","inReplyTo":{"link":"http://twitter.com/iAmMomiRhay/statuses/547154097283923968"},"generator":{"displayName":"Twitter Web Client","link":"http://twitter.com"},"body":"@iAmMomiRhay @inquirerdotnet I don't trust 2 those NPA & other leftist they're puppet to Commie China #duterte should execute them. 😡😤","favoritesCount":0,"objectType":"activity","actor":{"summary":"Buy Baybayin.PH tshirt by clicking #baybayinph","image":"https://pbs.twimg.com/profile_images/511434104382844929/E6s8ZSX0_normal.jpeg","statusesCount":10121,"utcOffset":"-32400","languages":["en"],"preferredUsername":"ericarreza","displayName":"Baybayin Retro","postedTime":"2009-05-10T02:10:15.000Z","link":"http://www.twitter.com/ericarreza","verified":false,"friendsCount":2001,"twitterTimeZone":"Alaska","favoritesCount":4588,"listedCount":3,"objectType":"person","links":[{"rel":"me","href":"http://facebook.com/r1210designers"}],"location":{"displayName":"Pearl of The Orient Sea","objectType":"place"},"id":"id:twitter.com:38975279","followersCount":434},"provider":{"displayName":"Twitter","link":"http://www.twitter.com","objectType":"service"},"twitter_filter_level":"medium","twitter_entities":{"urls":[],"hashtags":[{"indices":[106,114],"text":"duterte"}],"user_mentions":[{"indices":[0,12],"screen_name":"iAmMomiRhay","id_str":"248089128","name":"rhay garcia","id":248089128},{"indices":[13,28],"screen_name":"inquirerdotnet","id_str":"15448383","name":"Inquirer Group","id":15448383}],"trends":[],"symbols":[]},"twitter_lang":"en","id":"tag:search.twitter.com,2005:547225910999384065","retweetCount":0,"gnip":{"language":{"value":"en"}},"object":{"summary":"@iAmMomiRhay @inquirerdotnet I don't trust 2 those NPA & other leftist they're puppet to Commie China #duterte should execute them. 😡😤","postedTime":"2014-12-23T03:03:18.000Z","link":"http://twitter.com/ericarreza/statuses/547225910999384065","id":"object:search.twitter.com,2005:547225910999384065","objectType":"note"}}}],
@@ -229,11 +231,11 @@ For the count operation, this is the URL we generate
 		String urlstring = connector.getUrl() + "/api/v1/messages/count?q=" + URLEncoder.encode(input_query, "UTF-8");
 ````
 
-`input_query` refers to the value you included in the text field.
+`input_query` refers to the value you entered in the text field.
 
 `URLEncoder.encode` is a function which allows symbols e.g. #, (space), $ to be converted into a format that can be transmitted over the internet
 
-`/api/v1/messages/count?q=`will be appended to the url, which specifies that we will be using the `count` operation
+`/api/v1/messages/count?q=`will be appended to the url, it specifies that we will be using the `count` operation
 
 For the search operation, this is the URL we generate
 
@@ -245,7 +247,7 @@ For the search operation, this is the URL we generate
 
 ````
 
-`input_query` and `size` are the parameters which you inputted in the text field.
+`input_query` and `size` are the parameters which you entered in the text field.
 
 	>input_query refers to a keyword you want to search
 	
@@ -253,7 +255,7 @@ For the search operation, this is the URL we generate
 
 `URLEncoder.encode` is a function which allows symbols e.g. #, (space), $ to be converted into a format that can be transmitted over the internet
 
-`/api/v1/messages/search?q=` will be appended to the url, which specifies that we will be using the `search` operation
+`/api/v1/messages/search?q=` will be appended to the url, it specifies that we will be using the `search` operation
 
 
 To use the Insights for Twitter service, we need to authenticate ourselves
@@ -277,7 +279,7 @@ An example of how it looks like is this
 
 	> Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
 
-We do this by getting the username and password credentials in the VCAP Services and combining them together seperated with a colon
+We do this by getting the username and password credentials in the VCAP Services and combining them together into one string seperated by a colon
 
 ```` String userandpass = connector.getUsername() + ":" + connector.getPassword(); ````
 	
